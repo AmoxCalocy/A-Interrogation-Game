@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SuspectResource" format=3 uid="uid://cqt74uiw4r2h6"]
+
+[ext_resource type="Texture2D" uid="uid://c73vd2vme8qrf" path="res://assets/sprites/li_portrait.png" id="1_gy2aa"]
+[ext_resource type="Script" uid="uid://blhfog32yrc4k" path="res://scripts/SuspectResource.gd" id="1_zzz"]
+
+[resource]
+script = ExtResource("1_zzz")
+id = "li_02"
+suspect_name = "李某"
+base_stress = 10
+base_defense = 70
+portrait = ExtResource("1_gy2aa")

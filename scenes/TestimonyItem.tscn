@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/TestimonyItem.gd" id="1_xxx"]
+
+[node name="TestimonyItem" type="Label"]
+offset_right = 200.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+text = "• 证词摘要文本"
+autowrap_mode = 2
+script = ExtResource("1_xxx")

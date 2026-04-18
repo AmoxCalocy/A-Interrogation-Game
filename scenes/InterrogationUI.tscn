@@ -1,0 +1,134 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/InterrogationUI.gd" id="1_xxx"]
+[ext_resource type="PackedScene" path="res://scenes/IntelligencePanel.tscn" id="2_yyy"]
+[ext_resource type="PackedScene" path="res://scenes/ResultPanel.tscn" id="3_zzz"]
+
+[node name="InterrogationUI" type="Node"]
+script = ExtResource("1_xxx")
+
+[node name="VisualsLayer" type="CanvasLayer" parent="."]
+layer = 1
+
+[node name="Background" type="TextureRect" parent="VisualsLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SuspectPortrait" type="TextureRect" parent="VisualsLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ControlLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="HUD" type="VBoxContainer" parent="ControlLayer"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 500.0
+offset_bottom = 100.0
+mouse_filter = 1
+theme_override_constants/separation = 10
+
+[node name="StressBar" type="HBoxContainer" parent="ControlLayer/HUD"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="ControlLayer/HUD/StressBar"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "压力值:"
+
+[node name="ProgressBar" type="ProgressBar" parent="ControlLayer/HUD/StressBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+value = 20.0
+
+[node name="DefenseBar" type="HBoxContainer" parent="ControlLayer/HUD"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="ControlLayer/HUD/DefenseBar"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "防备心:"
+
+[node name="ProgressBar" type="ProgressBar" parent="ControlLayer/HUD/DefenseBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+value = 50.0
+
+[node name="RightControls" type="VBoxContainer" parent="ControlLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 150.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="SuspectSelector" type="OptionButton" parent="ControlLayer/RightControls"]
+layout_mode = 2
+text = "切换嫌疑人"
+visible = false
+
+[node name="IntelButton" type="Button" parent="ControlLayer/RightControls"]
+layout_mode = 2
+text = "档案/证词"
+
+[node name="PresentEvidenceButton" type="Button" parent="ControlLayer/RightControls"]
+layout_mode = 2
+disabled = true
+text = "出示证据"
+
+[node name="IntelligencePanel" parent="ControlLayer" instance=ExtResource("2_yyy")]
+visible = false
+anchors_preset = 11
+anchor_left = 1.0
+offset_left = -320.0
+offset_top = 190.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="StartButton" type="Button" parent="ControlLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "开始审讯"
+
+[node name="ResultPanel" parent="ControlLayer" instance=ExtResource("3_zzz")]
+visible = false
+
+[connection signal="item_selected" from="ControlLayer/RightControls/SuspectSelector" to="." method="_on_suspect_selector_item_selected"]
+[connection signal="pressed" from="ControlLayer/RightControls/IntelButton" to="." method="_on_intel_button_pressed"]
+[connection signal="pressed" from="ControlLayer/RightControls/PresentEvidenceButton" to="." method="_on_present_evidence_button_pressed"]
+[connection signal="pressed" from="ControlLayer/StartButton" to="." method="_on_start_button_pressed"]

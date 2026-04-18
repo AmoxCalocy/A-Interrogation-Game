@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EvidenceResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/EvidenceResource.gd" id="1_xxx"]
+
+[resource]
+script = ExtResource("1_xxx")
+id = "knife_01"
+name = "带血的刀"
+description = "在案发现场发现的刀，上面有血迹。"

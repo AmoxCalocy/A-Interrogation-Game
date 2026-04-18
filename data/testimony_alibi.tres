@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TestimonyResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/TestimonyResource.gd" id="1_yyy"]
+
+[resource]
+script = ExtResource("1_yyy")
+id = "alibi_01"
+summary = "晚上8点在家看电视"
+full_text = "案发那晚8点左右，我一直待在家里看电视，根本没有出门。"

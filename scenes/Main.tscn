@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://6kymyqkqw8fj"]
+
+[ext_resource type="PackedScene" path="res://scenes/InterrogationUI.tscn" id="1_xxx"]
+
+[node name="Main" type="Node" unique_id=989358964]
+
+[node name="InterrogationUI" parent="." unique_id=1369016467 instance=ExtResource("1_xxx")]

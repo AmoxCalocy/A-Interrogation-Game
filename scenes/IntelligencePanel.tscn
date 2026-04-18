@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/IntelligencePanel.gd" id="1_xxx"]
+
+[node name="IntelligencePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_xxx")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+current_tab = 0
+
+[node name="证据档案" type="MarginContainer" parent="Panel/TabContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/证据档案"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="EvidenceList" type="VBoxContainer" parent="Panel/TabContainer/证据档案/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="证词记录" type="MarginContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/证词记录"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="TestimonyList" type="VBoxContainer" parent="Panel/TabContainer/证词记录/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="对话回顾" type="MarginContainer" parent="Panel/TabContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/TabContainer/对话回顾"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="HistoryList" type="VBoxContainer" parent="Panel/TabContainer/对话回顾/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_constants/separation = 10
+
+[node name="SelectedInfo" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="Panel/SelectedInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "当前未选择证据"
+horizontal_alignment = 1
+vertical_alignment = 1

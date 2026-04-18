@@ -1,0 +1,178 @@
+~ start_wang_01
+
+# 审讯开始。王某坐在你对面，神情紧张。
+
+王某: 警官，我真的什么都不知道。
+do GameState.add_to_history("王某", "警官，我真的什么都不知道。")
+do GameState.disable_presentation()
+
+- [问话] 你案发当晚在哪？
+	do GameState.add_to_history("警官", "你案发当晚在哪？")
+	王某: 我...我在家看电视。
+	do GameState.add_to_history("王某", "我...我在家看电视。")
+	# 获取证词
+	do GameState.add_testimony(load("res://data/testimony_alibi.tres"))
+	=> loop_wang_01
+- [威逼] 别跟我耍花招，王某。我知道你在现场。
+	do GameState.add_to_history("警官", "别跟我耍花招，王某。我知道你在现场。")
+	do GameState.adjust_stress(20)
+	do GameState.adjust_defense(15)
+	王某: (紧张地搓手) 我...我只是路过。
+	do GameState.add_to_history("王某", "(紧张地搓手) 我...我只是路过。")
+	=> loop_wang_01
+- [温和] 喝口水吧，我们只是聊聊。
+	do GameState.add_to_history("警官", "喝口水吧，我们只是聊聊。")
+	do GameState.adjust_stress(5)
+	do GameState.adjust_defense(-15)
+	王某: 谢谢警官...
+	do GameState.add_to_history("王某", "谢谢警官...")
+	=> loop_wang_01
+
+~ loop_wang_01
+
+王某: 您还有什么要问的吗？
+do GameState.disable_presentation()
+
+- 关于不在场证明...
+	do GameState.add_to_history("警官", "关于不在场证明...")
+	王某: 我真的在家看电视。这有什么好怀疑的？
+	do GameState.add_to_history("王某", "我真的在家看电视。这有什么好怀疑的？")
+	# 此时进入矛盾点，启用出示证据按钮
+	do GameState.enable_presentation("knife_01")
+	- 难道你没去过杂物间吗？
+		do GameState.add_to_history("警官", "难道你没去过杂物间吗？")
+		王某: 杂物间？去那干什么？那里只有些破烂。
+		do GameState.add_to_history("王某", "杂物间？去那干什么？那里只有些破烂。")
+		=> loop_wang_01
+	- [继续审视王某]
+		王某: (王某避开了你的目光...)
+		do GameState.add_to_history("王某", "(王某避开了你的目光...)")
+		=> loop_wang_01
+
+# --- 王某 反驳逻辑分支 (由信号触发) ---
+~ on_evidence_presented_wang_01
+do GameState.disable_presentation()
+
+if GameState.selected_evidence_id == "knife_01"
+	警官: (猛地把刀甩在桌上) 那这把带血的刀你怎么解释？它就在你的杂物间里！
+	do GameState.add_to_history("警官", "(猛地把刀甩在桌上) 那这把带血的刀你怎么解释？它就在你的杂物间里！")
+	do GameState.adjust_stress(40)
+	do GameState.adjust_defense(-30)
+	王某: (脸色惨白) 这...这...我...
+	do GameState.add_to_history("王某", "(脸色惨白) 这...这...我...")
+	# 降低难度：压力 > 40, 防备心 < 50 即可破防
+	if GameState.can_get_clue(40, 50)
+		王某: 好吧...我说。那把刀是有人寄给我的...
+		do GameState.add_to_history("王某", "好吧...我说。那把刀是有人寄给我的...")
+		=> truth_revealed_wang_01
+	else
+		系统: (嫌疑人的防备心仍然很高，他决定继续狡辩。)
+		王某: (深呼吸) 这刀不是我的！肯定是有人栽赃！
+		do GameState.add_to_history("王某", "(深呼吸) 这刀不是我的！肯定是有人栽赃！")
+		=> loop_wang_01
+else
+	警官: 你看看这个！
+	do GameState.add_to_history("警官", "你看看这个！")
+	王某: 这...这跟案子有什么关系吗？
+	do GameState.add_to_history("王某", "这...这跟案子有什么关系吗？")
+	do GameState.adjust_defense(15)
+	do GameState.adjust_stress(-5)
+	王某: 警官，请不要浪费我的时间。
+	do GameState.add_to_history("王某", "警官，请不要浪费我的时间。")
+	=> loop_wang_01
+
+~ truth_revealed_wang_01
+王某: 我说，我全都说... (王某终于交代了真相)
+do GameState.add_to_history("王某", "我说，我全都说... (王某终于交代了真相)")
+# 触发结算面板
+do GameState.solve_case()
+系统: 恭喜！你成功攻破了王某的心理防线。
+=> END
+
+# ----------------------------------------------------
+# 李某 (Li_02) 的独立剧本
+# ----------------------------------------------------
+
+~ start_li_02
+
+# 李某表现得非常镇定。
+李某: 警官，传唤我有什么事吗？我很忙的。
+do GameState.add_to_history("李某", "警官，传唤我有什么事吗？我很忙的。")
+do GameState.disable_presentation()
+
+- [问话] 昨晚案发时你在哪里？
+	do GameState.add_to_history("警官", "昨晚案发时你在哪里？")
+	李某: 我在公司加班。你可以去查公司的监控。
+	do GameState.add_to_history("李某", "我在公司加班。你可以去查公司的监控。")
+	=> loop_li_02
+- [威逼] 少装蒜，李某。有人看到你出现在现场。
+	do GameState.add_to_history("警官", "少装蒜，李某。有人看到你出现在现场。")
+	do GameState.adjust_stress(15)
+	do GameState.adjust_defense(25)
+	李某: (冷笑) 谁看到的？让他来和我当面对质。
+	do GameState.add_to_history("李某", "(冷笑) 谁看到的？让他来和我当面对质。")
+	=> loop_li_02
+- [诱导] 我们掌握了一些情况，你现在坦白对你有好处。
+	do GameState.add_to_history("警官", "我们掌握了一些情况，你现在坦白对你有好处。")
+	do GameState.adjust_stress(10)
+	do GameState.adjust_defense(5)
+	李某: (眉头微皱) 我没什么好坦白的。
+	do GameState.add_to_history("李某", "(眉头微皱) 我没什么好坦白的。")
+	=> loop_li_02
+
+~ loop_li_02
+
+李某: 可以让我走了吗？
+do GameState.add_to_history("李某", "可以让我走了吗？")
+do GameState.disable_presentation()
+
+- 关于公司监控...
+	do GameState.add_to_history("警官", "关于公司监控...")
+	李某: 监控坏了那是物业的问题，与我无关。
+	do GameState.add_to_history("李某", "监控坏了那是物业的问题，与我无关。")
+	# 此时进入矛盾点，等待出示证据
+	do GameState.enable_presentation("knife_01")
+	- 监控真的坏了吗？
+		do GameState.add_to_history("警官", "监控真的坏了吗？")
+		李某: 我怎么知道。
+		do GameState.add_to_history("李某", "我怎么知道。")
+		=> loop_li_02
+	- [静静地看着他]
+		李某: (不耐烦地敲击桌面)
+		do GameState.add_to_history("李某", "(不耐烦地敲击桌面)")
+		=> loop_li_02
+
+~ on_evidence_presented_li_02
+do GameState.disable_presentation()
+
+if GameState.selected_evidence_id == "knife_01"
+	警官: 如果你一直在公司，为什么这把凶器上会有你的指纹？
+	do GameState.add_to_history("警官", "如果你一直在公司，为什么这把凶器上会有你的指纹？")
+	do GameState.adjust_stress(50)
+	do GameState.adjust_defense(-40)
+	李某: (瞳孔地震) 这不可能...我明明...
+	do GameState.add_to_history("李某", "(瞳孔地震) 这不可能...我明明...")
+	if GameState.can_get_clue(50, 40)
+		李某: (叹气) 是我...我只是一时冲动...
+		do GameState.add_to_history("李某", "(叹气) 是我...我只是一时冲动...")
+		=> truth_revealed_li_02
+	else
+		系统: (李某很快恢复了冷静)
+		李某: 警官，这只能说明我接触过那把刀，说明不了什么。
+		do GameState.add_to_history("李某", "警官，这只能说明我接触过那把刀，说明不了什么。")
+		=> loop_li_02
+else
+	警官: 这是什么你认识吗？
+	do GameState.add_to_history("警官", "这是什么你认识吗？")
+	李某: 毫无意义的把戏。
+	do GameState.add_to_history("李某", "毫无意义的把戏。")
+	do GameState.adjust_defense(20)
+	do GameState.adjust_stress(-10)
+	=> loop_li_02
+
+~ truth_revealed_li_02
+李某: 我认罪。
+do GameState.add_to_history("李某", "我认罪。")
+do GameState.solve_case()
+系统: 恭喜！你成功攻破了李某的心理防线。
+=> END
