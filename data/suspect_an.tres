@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SuspectResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/SuspectResource.gd" id="1_zzz"]
+
+[resource]
+script = ExtResource("1_zzz")
+id = "an_01"
+suspect_name = "安某"
+base_stress = 10
+base_defense = 60

@@ -38,12 +38,16 @@ func _setup_initial_data() -> void:
 	GameState.recorded_testimonies.clear()
 	
 	var suspects: Array[SuspectResource] = [
-		load("res://data/suspect_wang.tres"),
-		load("res://data/suspect_li.tres")
+		load("res://data/suspect_an.tres"),
+		load("res://data/suspect_bai.tres"),
+		load("res://data/suspect_chen.tres")
 	]
 	GameState.setup_suspects(suspects)
 	
-	GameState.collected_evidences.append(load("res://data/evidence_knife.tres"))
+	GameState.collected_evidences.append(load("res://data/evidence_chat_log.tres"))
+	GameState.collected_evidences.append(load("res://data/evidence_factory.tres"))
+	GameState.collected_evidences.append(load("res://data/evidence_autopsy.tres"))
+	GameState.collected_evidences.append(load("res://data/evidence_school.tres"))
 	
 	suspect_selector.clear()
 	for i in range(GameState.active_suspects.size()):

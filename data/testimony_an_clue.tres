@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TestimonyResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/TestimonyResource.gd" id="1_yyy"]
+
+[resource]
+script = ExtResource("1_yyy")
+id = "an_clue"
+summary = "安某的线索：早退"
+full_text = "案发那天周五，死者比平时早下班，我看着她离开的。"

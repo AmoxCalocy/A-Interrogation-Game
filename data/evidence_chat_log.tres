@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EvidenceResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/EvidenceResource.gd" id="1_xxx"]
+
+[resource]
+script = ExtResource("1_xxx")
+id = "chat_log_01"
+name = "群组聊天记录"
+description = "安某与死者的聊天记录，显示两人因项目竞争发生过激烈冲突。"

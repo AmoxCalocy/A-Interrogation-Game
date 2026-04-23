@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TestimonyResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/TestimonyResource.gd" id="1_yyy"]
+
+[resource]
+script = ExtResource("1_yyy")
+id = "bai_clue"
+summary = "白某的线索：小学同学"
+full_text = "死者最近负责的化工厂项目，对接人跟她是小学同学。"

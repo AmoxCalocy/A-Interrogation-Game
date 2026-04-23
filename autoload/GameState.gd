@@ -20,6 +20,8 @@ var dialogue_history: Array = [] # 存储 {"speaker": String, "text": String}
 
 # --- 逻辑变量 (用于对话系统) ---
 var required_evidence_id: String = "" 
+var chen_asked_school: bool = false
+var chen_asked_time: bool = false
 
 # --- 核心信号 ---
 signal stress_changed(new_value: int)
@@ -90,6 +92,12 @@ func add_testimony(testimony: TestimonyResource) -> void:
 		recorded_testimonies.append(testimony)
 		testimony_recorded.emit(testimony)
 
+func has_testimony(id: String) -> bool:
+	for t in recorded_testimonies:
+		if t.id == id:
+			return true
+	return false
+
 # 封装证据选中逻辑
 func select_evidence(evidence_id: String) -> void:
 	if is_game_over: return
@@ -131,5 +139,7 @@ func reset() -> void:
 	dialogue_history.clear() # 清空历史
 	selected_evidence_id = ""
 	required_evidence_id = ""
+	chen_asked_school = false
+	chen_asked_time = false
 	presentation_ui_toggled.emit(false)
 	current_suspect = null

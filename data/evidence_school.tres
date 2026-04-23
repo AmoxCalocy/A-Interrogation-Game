@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EvidenceResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/EvidenceResource.gd" id="1_xxx"]
+
+[resource]
+script = ExtResource("1_xxx")
+id = "school_01"
+name = "废弃学校调查报告"
+description = "在废弃学校附近湖岸边发现死者滚落痕迹及死者丢失的手机。"

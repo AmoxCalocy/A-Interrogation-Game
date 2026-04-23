@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TestimonyResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/TestimonyResource.gd" id="1_yyy"]
+
+[resource]
+script = ExtResource("1_yyy")
+id = "chen_alibi"
+summary = "陈某的不在场证明"
+full_text = "周天凌晨，也就是法医推断的案发时间，我确确实实在实验室里做实验，有监控录像。"

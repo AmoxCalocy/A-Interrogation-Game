@@ -17,10 +17,12 @@
 - `suspects_state`: 持久化字典，用于在切换对象时保存和恢复各个嫌疑人的数值。
 - `dialogue_history`: 动态数组，顺序存储整个审讯过程中的每一条对话记录。
 - `is_game_over`: 针对每个嫌疑人独立的逻辑锁，确保胜负流程的原子性。
+- **跨嫌疑人线索追踪 (Cross-Suspect Clue Tracking)**: 结合 `recorded_testimonies` 数组和特定布尔变量（如 `chen_asked_school`），用于在主线剧情中强制检查玩家是否已掌握并抛出关键线索。
 
 ### 3.2 核心方法
 - `switch_suspect(suspect_id)`: 封装了状态的序列化与加载。
 - `add_to_history(speaker, text)`: 统一的对话记录入口，并触发更新信号。
+- `has_testimony(id)`: **[新增]** 查询情报面板中是否已收录特定证词，是对话系统中解锁条件分支的关键前置检查方法。
 
 ### 3.3 核心信号
 - `case_solved / case_failed`: 触发最终结算。

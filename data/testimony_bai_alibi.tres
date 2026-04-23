@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TestimonyResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/TestimonyResource.gd" id="1_yyy"]
+
+[resource]
+script = ExtResource("1_yyy")
+id = "bai_alibi"
+summary = "白某的不在场证明"
+full_text = "周末我在隔壁市出差。"

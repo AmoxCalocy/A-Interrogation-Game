@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EvidenceResource" format=3]
+
+[ext_resource type="Script" path="res://scripts/EvidenceResource.gd" id="1_xxx"]
+
+[resource]
+script = ExtResource("1_xxx")
+id = "autopsy_01"
+name = "尸检报告"
+description = "死因为溺水，后颈发现不明细小针孔，死亡时间可能受药物影响。"
