@@ -23,17 +23,28 @@
 
 ---
 
-## 第二阶段：对话系统集成与语气选择
+## 第二阶段：对话系统集成 (Dialogic) 与变量同步
 
-### 步骤 2.1：配置对话插件与基础 UI
+### 步骤 2.1：配置 Dialogic 2 插件与样式
 **指令：**
-1. 下载并安装 Godot 插件 `Dialogue Manager`。
-2. 创建 `InterrogationUI` 场景，根节点为 `CanvasLayer`，添加 `RichTextLabel` 作为对话框，以及一个用于选项的 `VBoxContainer`。
-3. 编写控制器脚本，调用 `DialogueManager.show_dialogue_balloon()` 渲染对话。
+1. 下载并安装 `Dialogic 2` 插件至 `res://addons/dialogic/`。
+2. 在项目设置中启用插件。
+3. 在 Dialogic 控制面板中创建基本角色（警官、嫌疑人）和首个时间轴 (Timeline)。
+4. 配置 Dialogic Layout，确保其与项目的审讯氛围匹配。
 **验证测试：**
-* 运行场景时，基础对话能正常显示，选项能正常点击。
+* 成功在 `Main.tscn` 中通过 `Dialogic.start("start_timeline")` 启动对话，文本和角色立绘显示正常。
+
+### 步骤 2.2：建立变量同步与事件监听
+**指令：**
+1. 在 Dialogic 变量面板中创建 `Stress` 和 `Defense` 变量。
+2. 在 `GameState.gd` 中实现变量监听，使 Dialogic 变量的变化能实时反馈到 UI。
+3. 利用 Dialogic 的“信号事件”触发指证环节。
+**验证测试：**
+* 在对话时间轴中修改变量，UI 进度条实时更新；触发信号时，游戏进入出示证据模式。
+
 
 ---
+
 
 ## 第三阶段：情报系统（档案夹与证词本）
 
